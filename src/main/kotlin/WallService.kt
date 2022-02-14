@@ -6,8 +6,9 @@ class WallService {
         if (uniqueIds.contains(post.id)) {
             println("Ошибка. Такой пост уже существует")
         } else {
-            uniqueIds += post.id
-            posts += post
+            val newId = if (uniqueIds.isEmpty()) 1 else uniqueIds.last() + 1
+            uniqueIds += newId
+            posts += post.copy(newId)
         }
         return posts.last()
     }

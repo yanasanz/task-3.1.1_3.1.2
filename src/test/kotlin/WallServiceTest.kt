@@ -21,7 +21,7 @@ class WallServiceTest {
         service.add(aboutCats)
         service.add(notesFromIndia)
         service.add(news)
-        val update = Post(8,733,52,4785, text = "Обновленные записки")
+        val update = Post(2,733,52,4785, text = "Обновленные записки")
         val result = service.update(update)
         assertTrue(result)
     }
