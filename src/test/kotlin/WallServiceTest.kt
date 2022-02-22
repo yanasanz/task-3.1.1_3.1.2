@@ -1,41 +1,77 @@
+import audio.Audio
+import audio.AudioAttachment
+import file.File
+import file.FileAttachment
+import link.Link
+import link.LinkAttachment
 import org.junit.Test
 import org.junit.Assert.*
+import photo.Photo
+import photo.PhotoAttachment
+import posts.Post
+import video.Video
+import video.VideoAttachment
 
 class WallServiceTest {
 
     @Test
+    fun is_attachment_added_with_right_type() {
+        val service = WallService()
+        val attachment1: Attachment = AudioAttachment(audio = Audio(12, 5, "колыбельная"))
+        val attachment2: Attachment = PhotoAttachment(photo = Photo(99, 48, 16))
+        val attachment3: Attachment = VideoAttachment(video = Video(53, 14, "о котиках"))
+        val attachment4: Attachment = FileAttachment(file = File(55, 98, "расписание"))
+        val attachment5: Attachment = LinkAttachment(link = Link("www", "сайт", "подпись"))
+        service.addAttachment(attachment1)
+        service.addAttachment(attachment2)
+        service.addAttachment(attachment3)
+        service.addAttachment(attachment4)
+        service.addAttachment(attachment5)
+        val result1 = service.attachments[0].type
+        val result2 = service.attachments[1].type
+        val result3 = service.attachments[2].type
+        val result4 = service.attachments[3].type
+        val result5 = service.attachments[4].type
+        assertEquals("audio", result1)
+        assertEquals("photo", result2)
+        assertEquals("video", result3)
+        assertEquals("file", result4)
+        assertEquals("link", result5)
+    }
+
+    @Test
     fun id_notNull_after_adding() {
-        val aboutDogs = Post(40,12,34,18, text = "Статья про собак")
+        val aboutDogs = Post(40, 12, 34, 18, text = "Статья про собак")
         val service = WallService()
         service.add(aboutDogs)
         val result = aboutDogs.id
-        assertNotEquals(0,result)
+        assertNotEquals(0, result)
     }
 
     @Test
     fun update_if_id_exists() {
-        val aboutCats = Post(1,12,34,18, text = "Статья про кошек")
-        val notesFromIndia = Post(8,48,458,7987, text = "Записки из Индии")
-        val news = Post(1, 76,24,45, text = "Новости")
+        val aboutCats = Post(1, 12, 34, 18, text = "Статья про кошек")
+        val notesFromIndia = Post(8, 48, 458, 7987, text = "Записки из Индии")
+        val news = Post(1, 76, 24, 45, text = "Новости")
         val service = WallService()
         service.add(aboutCats)
         service.add(notesFromIndia)
         service.add(news)
-        val update = Post(2,733,52,4785, text = "Обновленные записки")
+        val update = Post(2, 733, 52, 4785, text = "Обновленные записки")
         val result = service.update(update)
         assertTrue(result)
     }
 
     @Test
     fun update_if_id_does_not_exist() {
-        val aboutCats = Post(1,12,34,18, text = "Статья про кошек")
-        val notesFromIndia = Post(8,48,458,7987, text = "Записки из Индии")
-        val news = Post(1, 76,24,45, text = "Новости")
+        val aboutCats = Post(1, 12, 34, 18, text = "Статья про кошек")
+        val notesFromIndia = Post(8, 48, 458, 7987, text = "Записки из Индии")
+        val news = Post(1, 76, 24, 45, text = "Новости")
         val service = WallService()
         service.add(aboutCats)
         service.add(notesFromIndia)
         service.add(news)
-        val update = Post(9,733,52,4785, text = "Обновленные записки")
+        val update = Post(9, 733, 52, 4785, text = "Обновленные записки")
         val result = service.update(update)
         assertFalse(result)
     }

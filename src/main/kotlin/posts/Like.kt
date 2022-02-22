@@ -1,3 +1,5 @@
+package posts
+
 data class Like(
     val count: Int = 0,
     val userLikes: Boolean = false,

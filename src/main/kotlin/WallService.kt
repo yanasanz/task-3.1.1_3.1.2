@@ -1,6 +1,16 @@
+import posts.Post
+
 class WallService {
     private var posts = emptyArray<Post>()
     private var uniqueIds = emptyArray<Int>()
+    var attachments = emptyArray<Attachment>()
+
+
+
+    fun addAttachment(attachment: Attachment): Attachment {
+        attachments += attachment
+        return attachments.last()
+    }
 
     fun add(post: Post): Post {
         val newId = if (uniqueIds.isEmpty()) 1 else uniqueIds.last() + 1

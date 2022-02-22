@@ -1,3 +1,5 @@
+package posts
+
 data class PostSource(
     val type: String = "",
     val platform: String = "",
