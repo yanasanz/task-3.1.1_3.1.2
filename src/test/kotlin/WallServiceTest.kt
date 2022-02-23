@@ -1,16 +1,11 @@
 import audio.Audio
-import audio.AudioAttachment
 import file.File
-import file.FileAttachment
 import link.Link
-import link.LinkAttachment
 import org.junit.Test
 import org.junit.Assert.*
 import photo.Photo
-import photo.PhotoAttachment
 import posts.Post
 import video.Video
-import video.VideoAttachment
 
 class WallServiceTest {
 
