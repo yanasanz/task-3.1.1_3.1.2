@@ -4,8 +4,18 @@ class WallService {
     private var posts = emptyArray<Post>()
     private var uniqueIds = emptyArray<Int>()
     var attachments = emptyArray<Attachment>()
+    var wallComments = emptyArray<WallComment>()
 
-
+    fun createWallComment(wallComment: WallComment) {
+        for (post in posts) {
+            if (post.id == wallComment.postId) {
+                wallComments += wallComment
+                continue
+            } else {
+                throw PostNotFoundException("Не удалось добавить комментарий - нет такого поста")
+            }
+        }
+    }
 
     fun addAttachment(attachment: Attachment): Attachment {
         attachments += attachment

@@ -70,4 +70,23 @@ class WallServiceTest {
         val result = service.update(update)
         assertFalse(result)
     }
+
+    @Test(expected = PostNotFoundException::class)
+    fun shouldThrow() {
+            val service = WallService()
+            val post = Post(1, 5, 15, 9, text = "Новый пост")
+            service.add(post)
+            val wallComment = WallComment(25, 12, 3, text = "Комментарий к посту")
+            service.createWallComment(wallComment)
+    }
+
+    @Test
+    fun shouldNotThrow() {
+        val service = WallService()
+        val post = Post(1, 5, 15, 9, text = "Новый пост")
+        service.add(post)
+        val wallComment = WallComment(25, 12, 1, text = "Комментарий к посту")
+        service.createWallComment(wallComment)
+        assertTrue(service.wallComments.contains(wallComment))
+    }
 }
