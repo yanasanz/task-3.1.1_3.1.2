@@ -7,13 +7,15 @@ class WallService {
     var wallComments = emptyArray<WallComment>()
 
     fun createWallComment(wallComment: WallComment) {
+        var hasSuchComment: Boolean = false
         for (post in posts) {
             if (post.id == wallComment.postId) {
                 wallComments += wallComment
-                continue
-            } else {
-                throw PostNotFoundException("Не удалось добавить комментарий - нет такого поста")
+                hasSuchComment = true
             }
+        }
+        if (hasSuchComment == false) {
+            throw PostNotFoundException("Не удалось добавить комментарий - нет такого поста")
         }
     }
 

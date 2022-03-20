@@ -85,7 +85,9 @@ class WallServiceTest {
         val service = WallService()
         val post = Post(1, 5, 15, 9, text = "Новый пост")
         service.add(post)
-        val wallComment = WallComment(25, 12, 1, text = "Комментарий к посту")
+        val post2 = Post(2, 8, 7, 12, text = "Еще один пост")
+        service.add(post2)
+        val wallComment = WallComment(25, 12, 2, text = "Комментарий к посту")
         service.createWallComment(wallComment)
         assertTrue(service.wallComments.contains(wallComment))
     }
